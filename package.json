@@ -1,0 +1,27 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "Event Driven Applications - Package tracking system using TCP, socket.io, node, express",
+  "main": "hub.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MasteRminD6666/caps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MasteRminD6666/caps/issues"
+  },
+  "homepage": "https://github.com/MasteRminD6666/caps#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "faker": "^5.5.3",
+    "socket.io": "^4.3.2",
+    "socket.io-client": "^4.3.2",
+    "uuid": "^8.3.2"
+  }
+}

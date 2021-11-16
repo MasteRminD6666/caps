@@ -6,18 +6,16 @@ Event Driven Applications - Package tracking system using TCP, socket.io, node, 
 
 **Version**: 1.0.0
 
-### resources 
+### <center> links and resources </center>
 
 
 
-![console.log printout of app running](https://raw.githubusercontent.com/MasteRminD6666/caps/main/assets/teest%20passed.PNG)
-![console.log printout of app running](https://raw.githubusercontent.com/MasteRminD6666/caps/events/assets/test.PNG)
-![console.log printout of app running](./assets/test2.PNG)
+![console.log printout of app running](./assets/hub.PNG)
+![console.log printout of app running](./assets/driver.PNG)
+![console.log printout of app running](./assets/vendor.PNG)
 
 
 
-
-#### <center> [merged pull request - github](https://github.com/MasteRminD6666/caps/commit/addbdca4adfb7b2580bc26fd8d7bbc766681d715) </center>
 
 
 .env requirements
