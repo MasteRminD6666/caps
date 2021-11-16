@@ -1,21 +1,19 @@
-'use strict';
-
+"use strict";
 require('dotenv').config();
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000';
-const io = require('socket.io-client');
-const socket = io.connect(`${SERVER_URL}/caps`);
+const io = require("socket.io-client");
+const HUB_SERVER = process.env.HUB_SERVER || "http://localhost:3001/caps";
+const client = io.connect(HUB_SERVER);
 
-socket.on('pickup', payload => {
+client.on('order', ({ orderId, payload }) => {
+    client.emit("intransit", { orderId, payload });
 
-  setTimeout(() => {
-    console.log('================ DriverPickup FIRED ==================');
-    console.log(`DRIVER: picked up [ORDER_ID]: ${payload.order.orderId}`);
-    socket.emit('in-transit', payload);
-  }, 2000);
+    console.log(`DRIVER: Package # ${payload.orderId} is ready for pickup`);
 
-  setTimeout(() => {
-    console.log('=============== DriverDelivered FIRED =================');
-    console.log(`DRIVER: delivered [ORDER_ID]: ${payload.order.orderId}`, payload);
-    socket.emit('delivered', payload);
-  }, 4000);
+    setTimeout(() => {
+        console.log(`DRIVER: Package # ${payload.orderId} in transit`);
+    }, 5000)
+
+    setTimeout(() => {
+        console.log(`DRIVER: Package # ${payload.orderId} in delivered`);
+    }, 10000)
 });
