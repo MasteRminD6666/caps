@@ -11,7 +11,7 @@ Event Driven Applications - Package tracking system using TCP, socket.io, node, 
 
 
 ![console.log printout of app running](https://raw.githubusercontent.com/MasteRminD6666/caps/main/assets/teest%20passed.PNG)
-![console.log printout of app running](https://raw.githubusercontent.com/MasteRminD6666/caps/events/assets/test.PNG)
+![console.log printout of app running](https://github.com/MasteRminD6666/caps/blob/main/assets/test.PNG?raw=true)
 ![console.log printout of app running](./assets/test2.PNG)
 
 
