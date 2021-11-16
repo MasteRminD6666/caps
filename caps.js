@@ -3,18 +3,12 @@
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const io = require('socket.io')(PORT);
-
 const caps = io.of('/caps');
-
-
 io.on('connection', socket => {
   console.log('User/Socket connected to general server: ', socket.id);
 });
-
 caps.on('connection', socket => {
-
   console.log('User/Socket connected to caps NameSpace: ', socket.id);
-
   socket.on('join', room => {
     // console.log('================RAmi===========', socket.NameSpace);
     console.log(`CLIENT: ${socket.id} just connected to ${room}`);
