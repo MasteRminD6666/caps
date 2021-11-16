@@ -20,20 +20,24 @@ setTimeout(() => {
 
 
 }, 1000)
+client.on('order', ({ orderId, payload }) => {
+  client.emit("intransit", { orderId, payload });
 
-setTimeout(() => {
-  let order = {
-    orderId: faker.datatype.uuid(),
-    clientName: faker.name.findName(),
-    store: guitarStore,
-    address: faker.address.streetAddress()
-  }
-  client.emit('delivered', order);
+  console.log(`DRIVER: Package # ${payload.orderId} is ready for pickup`);
 
+  setTimeout(() => {
+      console.log(`DRIVER: Package # ${payload.orderId} in transit`);
+  }, 5000)
 
-}, 5000)
-
-client.on('send', payload => {
-
-  console.log(`Thank you for delivering  Package # ${payload.orderId} delivered`);
+  setTimeout(() => {
+      console.log(`DRIVER: Package # ${payload.orderId} in delivered`);
+  }, 20000)
 });
+
+
+client.on('order', ({ orderId, payload }) => {
+  client.emit('delivered',{ orderId, payload })
+
+})
+
+

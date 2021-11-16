@@ -25,12 +25,14 @@ caps.on("connection", socket => {
       queue[storeName] = {
         'PickedOrder': {},
         'intransit': {},
+        'delivered': {}
       };
     }
 
   })
   socket.on('newOrder', payload => {
     let orderId = uuidv4();
+    console.log('this is the queue' , queue[payload.store] )
     queue[payload.store]['PickedOrder'][orderId] = payload;
     //TODO create another one for transit 
     // no need rami to send the id get it from the payload 
@@ -40,17 +42,38 @@ caps.on("connection", socket => {
     caps.emit('order', { orderId, payload })
   })
 
-
+  
   socket.on('intransit', ({ orderId, payload }) => {
     delete queue[payload.store]['PickedOrder'][orderId];
     queue[payload.store]['intransit'][orderId] = payload;
-    console.log('updated queue:', queue[payload.store]);
+ 
+      console.log('updated queue:', queue[payload.store]);
+      
+  
+
   })
+
+    socket.on('delivered', ({orderId,payload}) => {
+
+      delete queue[payload.store]['intransit'][orderId];
+      queue[payload.store]['delivered'][orderId] = payload;
+      setTimeout(() => {
+        console.log('updated queue:', queue[payload.store]);
+        
+      },20000)
+  
+    })
+
   socket.on('delivered', payload => {
-    console.log(`Your order has been delivered order store-Name:${payload.store} Order_id: ${payload.orderId} `);
+    setTimeout(() => {
+      console.log(`Your order has been delivered order store-Name:${payload.store} Order_id: ${payload.orderId} `);
+      
+    },20000)
+   
+      
 
     caps.emit('send', payload);
 
-  });
 
+  });
 })
