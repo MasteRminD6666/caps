@@ -1,37 +1,34 @@
-'use strict';
+"use strict"
 
-require('dotenv').config();
-const PORT = process.env.PORT || 3000;
-const io = require('socket.io')(PORT);
-const caps = io.of('/caps');
-io.on('connection', socket => {
-  console.log('User/Socket connected to general server: ', socket.id);
-});
-caps.on('connection', socket => {
-  console.log('User/Socket connected to caps NameSpace: ', socket.id);
-  socket.on('join', room => {
-    // console.log('================RAmi===========', socket.NameSpace);
-    console.log(`CLIENT: ${socket.id} just connected to ${room}`);
-    socket.join(room);
-  });
+//Note Rami this hub file used to manage events 
 
-  socket.on('pickup', (payload) => {
 
-    let time = new Date();
-    console.log('EVENT: pickup', time, payload);
-    caps.emit('pickup', payload);
-  });
+const { v4: uuidv4 } = require('uuid');
+const io = require("socket.io")(3001);
+const caps = io.of("/caps");
+let listOfLogin = [];
+let queue = {};
+caps.on("connection", socket => {
+  console.log('connected to Global', socket.id);
+  socket.on("join", storeName => {
+    console.log(`Client: ${socket.id} just connected to ${storeName} `);
+    let clientObject = {
+      time: new Date(),
+      client: socket.id,
+      room: storeName,
+      namespace: '-----CAPS-----',
+    }
+    listOfLogin.push(clientObject);
+    console.log('Here is all the joined clients', listOfLogin);
 
-  socket.on('in-transit', payload => {
-    let time = new Date();
-    console.log('EVENT: in-transit', time, payload);
-    caps.emit('in-transit', payload);
-  });
+    if (!queue.hasOwnProperty(storeName)) {
+      queue[storeName] = {
+        'PickedOrder': {},
+        'intransit': {},
+      };
+    }
 
-  socket.on('delivered', payload => {
-    let time = new Date();
-    console.log('EVENT: delivered', time, payload);
-    caps.emit('delivered', payload);
-  });
+  })
 
-});
+
+})
