@@ -46,5 +46,5 @@ tests performed with jest
 ## Credits and Collaborations
 Estimate of time needed to complete: 2 hours
 Start time: 2:30 pm
-Finish time: 5:30 pm
-Actual time needed to complete: 3 hours
+Finish time: 7:30 pm
+Actual time needed to complete: 5 hours
